@@ -1,7 +1,9 @@
 {
     "name": "ObjectPool.Runtime",
     "rootNamespace": "MbsCore",
-    "references": [],
+    "references": [
+        "GUID:3c8d9d96a18574e4ba241eedf0cfedad"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
