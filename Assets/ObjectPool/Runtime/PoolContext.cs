@@ -6,6 +6,7 @@ using Object = System.Object;
 
 namespace MbsCore.ObjectPool.Runtime
 {
+    [AddComponentMenu("MbsCore/Pool/Context")]
     public sealed class PoolContext : MonoBehaviour, IPoolContext
     {
         private readonly Dictionary<GameObject, GameObjectPool> _poolMap = new();
