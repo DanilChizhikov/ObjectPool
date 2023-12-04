@@ -7,6 +7,7 @@ This package shows an implementation of the ObjectPool template, which allows yo
 ## Table of Contents
 - [Getting Started](#Getting-Started)
     - [Install manually (using .unitypackage)](#Install-manually-(using-.unitypackage))
+    - [Install via UPM (using Git URL)](#Install-via-UPM-(using-Git-URL))
 - [Basic Usage](#Basic-Usage)
     - [Scene Settings](#Scene-Settings)
     - [Runtime Code](#Runtime-Code)
@@ -20,6 +21,14 @@ Prerequisites:
 ### Install manually (using .unitypackage)
 1. Download the .unitypackage from [releases](https://github.com/DanilChizhikov/Localization/releases/) page.
 2. Open ObjectPool.x.x.x.unitypackage
+
+### Install via UPM (using Git URL)
+1. Navigate to your project's Packages folder and open the manifest.json file.
+2. Add this line below the "dependencies": { line
+    - ```json title="Packages/manifest.json"
+      "com.danilchizhikov.objectpool": "https://github.com/DanilChizhikov/ObjectPool.git?path=Assets/ObjectPool#0.0.1",
+      ```
+UPM should now install the package.
 
 ## Basic Usage
 

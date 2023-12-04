@@ -1,0 +1,24 @@
+{
+    "name": "com.danilchizhikov.objectpool",
+    "displayName": "Object Pool",
+    "version": "0.0.1",
+    "unity": "2022.3",
+    "unityRelease": "f.1",
+    "dependencies": {},
+    "description": "Object pool for Unity.",
+    "keywords": [
+      "objectpool"
+    ],
+    "category": "Tools",
+    "author": "MbsCore",
+    "repository": {
+        "type": "git",
+        "url": "ssh://github.com:DanilChizhikov/objectpool.git",
+        "directory": "com.danilchizhikov.objectpool"
+    },
+    "publishConfig": {
+        "registry": "https://npm.pkg.github.com/@DanilChizhikov"
+    },
+    "license": "MIT"
+  }
+  
