@@ -3,7 +3,6 @@
     "displayName": "Object Pool",
     "version": "0.0.1",
     "unity": "2022.3",
-    "unityRelease": "f.1",
     "dependencies": {},
     "description": "Object pool for Unity.",
     "keywords": [
