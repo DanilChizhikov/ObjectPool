@@ -19,7 +19,7 @@ Prerequisites:
 - [Unity](https://unity.com/releases/editor/archive) 2022.3+
 
 ### Install manually (using .unitypackage)
-1. Download the .unitypackage from [releases](https://github.com/DanilChizhikov/Localization/releases/) page.
+1. Download the .unitypackage from [releases](https://github.com/DanilChizhikov/ObjectPool/releases/) page.
 2. Open ObjectPool.x.x.x.unitypackage
 
 ### Install via UPM (using Git URL)
