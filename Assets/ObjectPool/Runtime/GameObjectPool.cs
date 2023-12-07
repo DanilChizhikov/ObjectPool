@@ -15,6 +15,9 @@ namespace MbsCore.ObjectPool.Runtime
         private readonly Transform _parent;
         private readonly Dictionary<GameObject, HashSet<IResettable>> _resettableMap;
         private readonly ObjectPool<GameObject> _objectPool;
+        private readonly Dictionary<CloneScope, int> _cloneCountMap;
+
+        public IReadOnlyDictionary<CloneScope, int> ScopeMap => _cloneCountMap;
 
         public GameObjectPool(GameObject origin, Transform parent, int capacity, int maxSize)
         {
@@ -23,6 +26,15 @@ namespace MbsCore.ObjectPool.Runtime
             _resettableMap = new Dictionary<GameObject, HashSet<IResettable>>();
             _objectPool = new ObjectPool<GameObject>(CreateClone, PrepareClone, ReleaseClone, DestroyClone,
                                                      defaultCapacity: capacity, maxSize: maxSize);
+
+            _cloneCountMap = new Dictionary<CloneScope, int>()
+                    {
+                            {CloneScope.All, 0},
+                            {CloneScope.Active, 0},
+                            {CloneScope.Passive, 0},
+                    };
+            
+            PrepareClones(capacity);
         }
 
         public GameObject GetClone() => _objectPool.Get();
@@ -40,6 +52,8 @@ namespace MbsCore.ObjectPool.Runtime
             IResettable[] resettables = clone.GetComponentsInChildren<IResettable>();
             _resettableMap.Add(clone, new HashSet<IResettable>(resettables));
             clone.SetActive(false);
+            _cloneCountMap[CloneScope.All] += 1;
+            _cloneCountMap[CloneScope.Passive] += 1;
             return clone;
         }
         
@@ -55,12 +69,16 @@ namespace MbsCore.ObjectPool.Runtime
             
             clone.transform.SetParent(null);
             clone.SetActive(true);
+            _cloneCountMap[CloneScope.Passive] -= 1;
+            _cloneCountMap[CloneScope.Active] += 1;
         }
         
         private void ReleaseClone(GameObject clone)
         {
             clone.transform.SetParent(_parent);
             clone.SetActive(false);
+            _cloneCountMap[CloneScope.Active] -= 1;
+            _cloneCountMap[CloneScope.Passive] += 1;
         }
         
         private void DestroyClone(GameObject clone)
@@ -68,6 +86,22 @@ namespace MbsCore.ObjectPool.Runtime
             OnClonePreDestroy?.Invoke(clone);
             _resettableMap.Remove(clone);
             Object.Destroy(clone);
+            _cloneCountMap[CloneScope.All] -= 1;
+            _cloneCountMap[CloneScope.Passive] -= 1;
+        }
+
+        private void PrepareClones(int defaultCapacity)
+        {
+            var clones = new HashSet<GameObject>(defaultCapacity);
+            for (int i = 0; i < defaultCapacity; i++)
+            {
+                clones.Add(GetClone());
+            }
+            
+            foreach (var clone in clones)
+            {
+                Return(clone);
+            }
         }
     }
 }

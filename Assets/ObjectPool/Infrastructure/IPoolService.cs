@@ -4,6 +4,8 @@ namespace MbsCore.ObjectPool.Infrastructure
 {
     public interface IPoolService
     {
+        int GetCloneCount<T>(T origin, CloneScope scope) where T : Component;
+        int GetCloneCount(GameObject origin, CloneScope scope);
         void PrepareClones<T>(T origin, int capacity) where T : Component;
         void PrepareClones(GameObject origin, int capacity);
         T GetClone<T>(T origin, Transform parent = null) where T : Component;
