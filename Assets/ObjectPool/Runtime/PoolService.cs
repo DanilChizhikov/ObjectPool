@@ -13,7 +13,12 @@ namespace MbsCore.ObjectPool.Runtime
         {
             _poolContext = poolContext;
         }
-        
+
+        public int GetCloneCount<T>(T origin, CloneScope scope) where T : Component =>
+                GetCloneCount(origin.gameObject, scope);
+
+        public int GetCloneCount(GameObject origin, CloneScope scope) => _poolContext.GetCloneCount(origin, scope);
+
         public void PrepareClones<T>(T origin, int capacity) where T : Component
         {
             PrepareClones(origin.gameObject, capacity);

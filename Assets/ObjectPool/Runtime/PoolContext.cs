@@ -11,9 +11,24 @@ namespace MbsCore.ObjectPool.Runtime
     {
         private readonly Dictionary<GameObject, GameObjectPool> _poolMap = new();
         private readonly Dictionary<GameObject, GameObject> _originMap = new();
-        private readonly Dictionary<GameObject, Dictionary<Type, Object>> _entityMap;
+        private readonly Dictionary<GameObject, Dictionary<Type, Object>> _entityMap = new();
 
         [SerializeField, Min(1)] private int _poolMaxSize = 10000;
+
+        public int GetCloneCount(GameObject origin, CloneScope scope)
+        {
+            if (!_poolMap.TryGetValue(origin, out GameObjectPool pool))
+            {
+                return 0;
+            }
+
+            if (!pool.ScopeMap.TryGetValue(scope, out int count))
+            {
+                count = 0;
+            }
+
+            return count;
+        }
 
         public T GetClone<T>(T origin, int capacity) where T : Component
         {
