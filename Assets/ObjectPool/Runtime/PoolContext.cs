@@ -1,20 +1,33 @@
 using System;
 using System.Collections.Generic;
-using MbsCore.ObjectPool.Infrastructure;
 using UnityEngine;
 using Object = System.Object;
 
-namespace MbsCore.ObjectPool.Runtime
+namespace MbsCore.ObjectPool
 {
-    [AddComponentMenu("MbsCore/Pool/Context")]
-    public sealed class PoolContext : MonoBehaviour, IPoolContext
+    internal sealed class PoolContext : IDisposable
     {
-        private readonly Dictionary<GameObject, GameObjectPool> _poolMap = new();
-        private readonly Dictionary<GameObject, GameObject> _originMap = new();
-        private readonly Dictionary<GameObject, Dictionary<Type, Object>> _entityMap = new();
+        private const int MinCapacity = 10;
 
-        [SerializeField, Min(1)] private int _poolMaxSize = 10000;
+        private readonly int _capacity;
+        private readonly Transform _container;
+        private readonly Dictionary<GameObject, GameObjectPool> _poolMap;
+        private readonly Dictionary<GameObject, GameObject> _originMap;
+        private readonly Dictionary<GameObject, Dictionary<Type, Object>> _entityMap;
 
+        private bool _isDisposed;
+        
+        public PoolContext(int capacity)
+        {
+            _capacity = Math.Max(capacity, MinCapacity);
+            _container = new GameObject(nameof(PoolContext)).transform;
+            UnityEngine.Object.DontDestroyOnLoad(_container);
+            _poolMap = new Dictionary<GameObject, GameObjectPool>();
+            _originMap = new Dictionary<GameObject, GameObject>();
+            _entityMap = new Dictionary<GameObject, Dictionary<Type, Object>>();
+            _isDisposed = false;
+        }
+        
         public int GetCloneCount(GameObject origin, CloneScope scope)
         {
             if (!_poolMap.TryGetValue(origin, out GameObjectPool pool))
@@ -22,12 +35,7 @@ namespace MbsCore.ObjectPool.Runtime
                 return 0;
             }
 
-            if (!pool.ScopeMap.TryGetValue(scope, out int count))
-            {
-                count = 0;
-            }
-
-            return count;
+            return pool.ScopeMap.GetValueOrDefault(scope, 0);
         }
 
         public T GetClone<T>(T origin, int capacity) where T : Component
@@ -54,7 +62,7 @@ namespace MbsCore.ObjectPool.Runtime
         {
             if (!_poolMap.TryGetValue(origin, out GameObjectPool pool))
             {
-                pool = new GameObjectPool(origin, transform, capacity, _poolMaxSize);
+                pool = new GameObjectPool(origin, CreateContainer(origin.name), capacity, _capacity);
                 pool.OnClonePreDestroy += ClonePreDestroyHandler;
                 _poolMap.Add(origin, pool);
             }
@@ -78,12 +86,11 @@ namespace MbsCore.ObjectPool.Runtime
 
         public void Remove(GameObject origin)
         {
-            if (!_poolMap.TryGetValue(origin, out GameObjectPool pool))
+            if (!_poolMap.Remove(origin, out GameObjectPool pool))
             {
                 return;
             }
 
-            _poolMap.Remove(origin);
             pool.Dispose();
             pool.OnClonePreDestroy -= ClonePreDestroyHandler;
         }
@@ -97,14 +104,28 @@ namespace MbsCore.ObjectPool.Runtime
             }
         }
         
+        public void Dispose()
+        {
+            if (_isDisposed)
+            {
+                return;
+            }
+            
+            Clear();
+            UnityEngine.Object.Destroy(_container.gameObject);
+            _isDisposed = true;
+        }
+        
         private void ClonePreDestroyHandler(GameObject clone)
         {
             _originMap.Remove(clone);
         }
 
-        private void OnDestroy()
+        private Transform CreateContainer(string originName)
         {
-            Clear();
+            Transform container = new GameObject(originName).transform;
+            container.SetParent(_container);
+            return container;
         }
     }
 }

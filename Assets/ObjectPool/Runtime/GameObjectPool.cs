@@ -1,11 +1,10 @@
 using System;
 using System.Collections.Generic;
-using MbsCore.ObjectPool.Infrastructure;
 using UnityEngine;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 
-namespace MbsCore.ObjectPool.Runtime
+namespace MbsCore.ObjectPool
 {
     internal sealed class GameObjectPool : IDisposable
     {

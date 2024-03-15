@@ -26,7 +26,7 @@ Prerequisites:
 1. Navigate to your project's Packages folder and open the manifest.json file.
 2. Add this line below the "dependencies": { line
     - ```json title="Packages/manifest.json"
-      "com.danilchizhikov.objectpool": "https://github.com/DanilChizhikov/ObjectPool.git?path=Assets/ObjectPool#0.0.2",
+      "com.danilchizhikov.objectpool": "https://github.com/DanilChizhikov/ObjectPool.git?path=Assets/ObjectPool",
       ```
 UPM should now install the package.
 
@@ -44,7 +44,7 @@ Here we will show the easiest way, which is not the method that we recommend usi
 ```csharp
 public class PoolServiceBootstrap : MonoBehaviour
 {
-    [SerializeField] private PoolContext _context = default;
+    [SerializeField] private ObjectPoolSettings _settings = default;
 
     private static IPoolService _service;
 
@@ -58,7 +58,7 @@ public class PoolServiceBootstrap : MonoBehaviour
             return;
         }
 
-        _service = new PoolService(_context);
+        _service = new PoolService(_settings);
     }
 }
 ```
@@ -67,10 +67,12 @@ The system allows you to get objects in different ways, all available methods ar
 ```csharp
 using UnityEngine;
 
-namespace MbsCore.ObjectPool.Infrastructure
+namespace MbsCore.ObjectPool
 {
     public interface IPoolService
     {
+        int GetCloneCount<T>(T origin, CloneScope scope) where T : Component;
+        int GetCloneCount(GameObject origin, CloneScope scope);
         void PrepareClones<T>(T origin, int capacity) where T : Component;
         void PrepareClones(GameObject origin, int capacity);
         T GetClone<T>(T origin, Transform parent = null) where T : Component;

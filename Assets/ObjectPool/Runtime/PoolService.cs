@@ -1,19 +1,18 @@
-using MbsCore.ObjectPool.Infrastructure;
 using UnityEngine;
 
-namespace MbsCore.ObjectPool.Runtime
+namespace MbsCore.ObjectPool
 {
     public sealed class PoolService : IPoolService
     {
         private const int DefaultCapacity = 10;
         
-        private readonly IPoolContext _poolContext;
+        private readonly PoolContext _poolContext;
 
-        public PoolService(IPoolContext poolContext)
+        public PoolService(IObjectPoolSettings settings)
         {
-            _poolContext = poolContext;
+            _poolContext = new PoolContext(settings.Capacity);
         }
-
+        
         public int GetCloneCount<T>(T origin, CloneScope scope) where T : Component =>
                 GetCloneCount(origin.gameObject, scope);
 

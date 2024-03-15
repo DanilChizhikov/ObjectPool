@@ -1,5 +1,3 @@
-using MbsCore.ObjectPool.Infrastructure;
-using MbsCore.ObjectPool.Runtime;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -7,25 +5,21 @@ namespace MbsCore.ObjectPool.Tests
 {
     internal sealed class ObjectPoolTest
     {
-        private const int PrepareCount = 20;
-        
-        private IPoolService _poolService;
-        private IPoolContext _poolContext;
-
-        [SetUp]
-        public void Setup()
+        private class TestObjectPoolSettings : IObjectPoolSettings
         {
-            _poolContext = new GameObject(nameof(PoolContext)).AddComponent<PoolContext>();
-            _poolService = new PoolService(_poolContext);
+            public int Capacity => 1000;
         }
+        
+        private const int PrepareCount = 20;
 
         [Test]
-        public void PrepareTest()
+        public void Prepare_20_Clones_For_Example_GameObject_Test()
         {
+            IPoolService poolService = new PoolService(new TestObjectPoolSettings());
             GameObject exampleGameObject = new GameObject("Example");
-            _poolService.PrepareClones(exampleGameObject, PrepareCount);
-            bool cloneAreEqualPrepareCount = _poolService.GetCloneCount(exampleGameObject, CloneScope.All) == PrepareCount;
-            _poolService.Remove(exampleGameObject);
+            poolService.PrepareClones(exampleGameObject, PrepareCount);
+            bool cloneAreEqualPrepareCount = poolService.GetCloneCount(exampleGameObject, CloneScope.All) == PrepareCount;
+            poolService.Remove(exampleGameObject);
             Object.Destroy(exampleGameObject);
             Assert.AreEqual(true, cloneAreEqualPrepareCount);
         }

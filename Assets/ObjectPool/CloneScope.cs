@@ -1,4 +1,4 @@
-namespace MbsCore.ObjectPool.Infrastructure
+namespace MbsCore.ObjectPool
 {
     public enum CloneScope
     {

@@ -1,5 +1,5 @@
 {
-    "name": "ObjectPool.Infrastructure",
+    "name": "ObjectPool",
     "rootNamespace": "MbsCore",
     "references": [],
     "includePlatforms": [],

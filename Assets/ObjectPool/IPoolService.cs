@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace MbsCore.ObjectPool.Infrastructure
+namespace MbsCore.ObjectPool
 {
     public interface IPoolService
     {
