@@ -1,4 +1,4 @@
-namespace MbsCore.ObjectPool
+namespace DTech.ObjectPool
 {
     public interface IObjectPoolSettings
     {

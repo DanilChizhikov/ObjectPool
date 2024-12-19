@@ -1,9 +1,7 @@
 {
-    "name": "ObjectPool.Runtime",
-    "rootNamespace": "MbsCore",
-    "references": [
-        "GUID:3c8d9d96a18574e4ba241eedf0cfedad"
-    ],
+    "name": "com.dtech.objectpool",
+    "rootNamespace": "DTech",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

@@ -1,13 +1,14 @@
 {
-    "name": "ObjectPool.Tests",
-    "rootNamespace": "MbsCore",
+    "name": "com.dtech.objectpool.editortests",
+    "rootNamespace": "DTech",
     "references": [
         "GUID:27619889b8ba8c24980f49ee34dbb44a",
         "GUID:0acc523941302664db1f4e527237feb3",
-        "GUID:3c8d9d96a18574e4ba241eedf0cfedad",
-        "GUID:6f7f47f789102466c8d978bf677afcfd"
+        "GUID:3c8d9d96a18574e4ba241eedf0cfedad"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,

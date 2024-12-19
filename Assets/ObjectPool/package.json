@@ -1,7 +1,7 @@
 {
     "name": "com.danilchizhikov.objectpool",
     "displayName": "Object Pool",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "unity": "2022.3",
     "dependencies": {},
     "description": "Object pool for Unity.",
@@ -9,7 +9,7 @@
       "objectpool"
     ],
     "category": "Tools",
-    "author": "MbsCore",
+    "author": "DTech",
     "repository": {
         "type": "git",
         "url": "ssh://github.com:DanilChizhikov/objectpool.git",
