@@ -202,7 +202,7 @@ To run the tests:
 3. Click "Run All"
 
 ## Dependencies
-- [Extensions](https://github.com/DanilChizhikov/Extensions)
+- [Extensions](https://github.com/DanilChizhikov/Extensions) 0.1+
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
