@@ -26,7 +26,7 @@ Prerequisites:
 1. Navigate to your project's Packages folder and open the manifest.json file.
 2. Add this line below the "dependencies": { line
     - ```json title="Packages/manifest.json"
-      "com.danilchizhikov.objectpool": "https://github.com/DanilChizhikov/ObjectPool.git?path=Assets/ObjectPool",
+      "com.dtech.object-pool": "https://github.com/DanilChizhikov/ObjectPool.git?path=Assets/ObjectPool",
       ```
 UPM should now install the package.
 
