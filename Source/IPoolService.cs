@@ -1,9 +1,20 @@
+using UnityEngine;
 
 namespace DTech.ObjectPool
 {
     public interface IPoolService
     {
-        IPoolProvider<TConfig, TObject> GetProvider<TConfig, TObject>(TConfig config) where TConfig : IPoolConfig where TObject : class;
-        void Clear(IPoolConfig config);
+        int GetCloneCount<T>(T origin, CloneScope scope) where T : Component;
+        int GetCloneCount(GameObject origin, CloneScope scope);
+        void PrepareClones<T>(T origin, IPoolConfig config) where T : Component;
+        void PrepareClones(GameObject origin, IPoolConfig config);
+        T GetClone<T>(T origin, Transform parent = null) where T : Component;
+        T GetClone<T>(T origin, Vector3 position, Quaternion rotation, Transform parent = null) where T : Component;
+        GameObject GetClone(GameObject origin, Transform parent = null);
+        GameObject GetClone(GameObject origin, Vector3 position, Quaternion rotation, Transform parent = null);
+        void ReturnClone<T>(T clone) where T : Component;
+        void ReturnClone(GameObject clone);
+        void Remove<T>(T origin) where T : Component;
+        void Remove(GameObject origin);
     }
 }
