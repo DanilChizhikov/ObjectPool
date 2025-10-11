@@ -1,9 +1,11 @@
 {
-    "name": "com.danilchizhikov.objectpool",
+    "name": "com.dtech.object-pool",
     "displayName": "Object Pool",
     "version": "1.0.0",
     "unity": "2022.3",
-    "dependencies": {},
+    "dependencies": {
+      "com.dtech.extensions" : "0.1.0"
+    },
     "description": "Object pool for Unity.",
     "keywords": [
       "objectpool"
@@ -13,7 +15,7 @@
     "repository": {
         "type": "git",
         "url": "ssh://github.com:DanilChizhikov/objectpool.git",
-        "directory": "com.danilchizhikov.objectpool"
+        "directory": "com.dtech.object-pool"
     },
     "publishConfig": {
         "registry": "https://npm.pkg.github.com/@DanilChizhikov"

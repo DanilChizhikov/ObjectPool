@@ -1,7 +1,9 @@
 {
-    "name": "com.dtech.objectpool",
+    "name": "com.dtech.object-pool",
     "rootNamespace": "DTech",
-    "references": [],
+    "references": [
+      "GUID:bf0956da11227458b825a065927c25ef"
+    ],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,

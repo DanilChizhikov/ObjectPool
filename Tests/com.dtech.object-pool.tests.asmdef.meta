@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:EditorTests/com.dtech.objectpool.editortests.asmdef.meta
+guid: a9fb00abe744d45a3a0f4d0be88879b8
+========
+guid: 6113bb6bcd1ee46d1ab38453b3f11f1f
+>>>>>>>> dev/return-legacy-pool:Tests/com.dtech.object-pool.tests.asmdef.meta
+AssemblyDefinitionImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
