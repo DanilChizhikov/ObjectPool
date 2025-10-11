@@ -1,21 +1,12 @@
 {
-<<<<<<<< HEAD:EditorTests/com.dtech.objectpool.editortests.asmdef
-    "name": "com.dtech.objectpool.editortests",
-========
     "name": "com.dtech.object-pool.tests",
->>>>>>>> dev/return-legacy-pool:Tests/com.dtech.object-pool.tests.asmdef
     "rootNamespace": "DTech",
     "references": [
         "GUID:27619889b8ba8c24980f49ee34dbb44a",
         "GUID:0acc523941302664db1f4e527237feb3",
         "GUID:3c8d9d96a18574e4ba241eedf0cfedad"
-<<<<<<<< HEAD:EditorTests/com.dtech.objectpool.editortests.asmdef
     ],
-    "includePlatforms": [
-        "Editor"
-========
->>>>>>>> dev/return-legacy-pool:Tests/com.dtech.object-pool.tests.asmdef
-    ],
+    "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
